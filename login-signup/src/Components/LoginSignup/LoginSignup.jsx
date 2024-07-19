@@ -71,8 +71,14 @@ const LoginSignup = () => {
       }
       if (!formData.password) {
         errors.password = "Password is required";
-      } else if (formData.password.length > 8) {
-        errors.password = "Password cannot exceed 8 characters";
+      } else if (formData.password.length < 8) {
+        errors.password = "Password must be at least 8 characters long";
+      } else if (!/[A-Z]/.test(formData.password)) {
+        errors.password = "Password must contain at least one capital letter";
+      } else if (!/\d/.test(formData.password)) {
+        errors.password = "Password must contain at least one number";
+      } else if (!/[@$!%*?&]/.test(formData.password)) {
+        errors.password = "Password must contain at least one special character (@$!%*?&)";
       }
       if (!formData.confirmPassword) {
         errors.confirmPassword = "Confirm Password is required";
